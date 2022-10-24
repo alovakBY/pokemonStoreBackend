@@ -1,63 +1,54 @@
 const express = require("express");
-const cors = require("cors");
 const serverless = require("serverless-http");
-const dotenv = require("dotenv");
-const routes = require("./routes");
 
 const app = express();
-dotenv.config();
+const router = express.Router();
 
-const port = process.env.PORT || 8080;
+router.get("/", (req, res) => {
+  res.json({
+    hello: "hi!",
+  });
+});
 
-app.use(cors());
-app.use(express.json({ limit: "10mb" }));
-app.use(express.urlencoded({ limit: "10mb", extended: true }));
+router.get("/test", (req, res) => {
+  res.json({
+    hello: "test!",
+  });
+});
 
-// app.use("/", routes);
-app.use("/.netlify/functions/server", routes); // path must route to lambda
-// app.use("/", (req, res) => res.sendFile(path.join(__dirname, "../index.html")));
+router.post("/testpost", (req, res) => {
+  res.json({
+    hello: "hit the POST!",
+  });
+});
 
-// app.listen(port, () => {
-//   console.log(`server listening on port ${port}`);
-// });
+app.use(`/.netlify/functions/api`, router);
 
 module.exports = app;
 module.exports.handler = serverless(app);
 
-// app.post("/pokemons", async (req, res) => {
-//    console.log(req.body);
-//    const pokemonsCollection = await dbo.setPokemons(req.body);
-// });
+// const express = require("express");
+// const cors = require("cors");
+// const serverless = require("serverless-http");
+// const dotenv = require("dotenv");
+// const routes = require("./routes");
 
-// app.get("/products", async (req, res) => {
-//    const { page, limit } = req.query;
+// const app = express();
+// dotenv.config();
 
-//    const pokemonsCollection = await dbo.getPokemons(+page, +limit);
+// const port = process.env.PORT || 8080;
 
-//    res.send(pokemonsCollection);
-//    res.end();
-// });
+// app.use(cors());
+// app.use(express.json({ limit: "10mb" }));
+// app.use(express.urlencoded({ limit: "10mb", extended: true }));
 
-// app.post("/auth/signup", async (req, res) => {
-//    // console.log(req.body);
-//    const user = await dbo.setUser(req.body);
+// // app.use("/", routes);
+// app.use("/.netlify/functions/server", routes); // path must route to lambda
+// // app.use("/", (req, res) => res.sendFile(path.join(__dirname, "../index.html")));
 
-//    res.send(user);
-//    res.end();
-// });
+// // app.listen(port, () => {
+// //   console.log(`server listening on port ${port}`);
+// // });
 
-// app.post("/auth/signin", async (req, res) => {
-//    console.log(req);
-//    const user = await dbo.getUser(req.body);
-
-//    if (!user) {
-//       res.status(403).send({
-//          code: 403,
-//          message: "User couldn't be found",
-//       });
-//       res.end();
-//    } else {
-//       res.send(user);
-//       res.end();
-//    }
-// });
+// module.exports = app;
+// module.exports.handler = serverless(app);
