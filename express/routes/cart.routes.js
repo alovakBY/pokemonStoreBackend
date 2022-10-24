@@ -16,7 +16,18 @@ router.get("/", async (req, res) => {
          throw new Error("Cart not found");
       }
 
-      res.send(cart);
+      const resData = cart.itemsList.reduce(
+         (acc, item) => {
+            return {
+               ...acc,
+               quantity: acc.quantity + item.quantity,
+               totalPrice: acc.totalPrice + item.price * item.quantity,
+            };
+         },
+         { ...cart, quantity: 0, totalPrice: 0 }
+      );
+
+      res.send(resData);
    } catch (err) {
       res.status(403).send({
          code: 403,

@@ -5,75 +5,74 @@ const jwt = require("jsonwebtoken");
 const authRoutes = require("./auth.routes");
 const productsRoutes = require("./products.routes");
 const cartRoutes = require("./cart.routes");
+const orderRoutes = require("./order.routes");
 
-router.get("/another", (req, res) => res.json({ route: req.originalUrl }));
+// router.get("/another", (req, res) => res.json({ route: req.originalUrl }));
 
 router.use((req, res, next) => {
-  try {
-    if (
-      req.url.startsWith("/auth") /* || req.url.startsWith("/set_pokemons") */
-    ) {
-      next();
-    } else {
-      const token = req.headers?.authorization?.split(" ")[1];
+   try {
+      if (
+         req.url.startsWith(
+            "/auth"
+         ) /* || req.url.startsWith("/set_pokemons") */
+      ) {
+         next();
+      } else {
+         const token = req.headers?.authorization?.split(" ")[1];
 
-      if (!token) {
-        res.status(401).send({
-          code: 401,
-          message: "Not authorized",
-        });
+         if (!token) {
+            res.status(401).send({
+               code: 401,
+               message: "Not authorized",
+            });
 
-        res.end();
+            res.end();
 
-        return;
+            return;
+         }
+
+         const jwtDecoded = jwt.decode(token);
+
+         if (jwtDecoded.exp * 1000 < new Date().getTime()) {
+            res.status(401).send({
+               code: 401,
+               message: "Not authorized",
+            });
+
+            res.end();
+
+            return;
+         }
+
+         next();
       }
-
-      const jwtDecoded = jwt.decode(token);
-
-      if (jwtDecoded.exp * 1000 < new Date().getTime()) {
-        res.status(401).send({
-          code: 401,
-          message: "Not authorized",
-        });
-
-        res.end();
-
-        return;
-      }
-
-      next();
-    }
-  } catch (err) {
-    res.status(401).send({
-      code: 401,
-      message: "Not authorized",
-    });
-  }
+   } catch (err) {
+      res.status(401).send({
+         code: 401,
+         message: "Not authorized",
+      });
+   }
 });
 
 router.use("/set_pokemons", async (req, res) => {
-  await client.connect();
+   await client.connect();
 
-  console.log(req.body);
+   console.log(req.body);
 
-  const dbo = await client.db("pokemonStore");
+   const dbo = await client.db("pokemonStore");
 
-  const collection = await dbo.collection("products");
+   const collection = await dbo.collection("products");
 
-  const products = await collection.insertMany(req.body);
+   const products = await collection.insertMany(req.body);
 
-  console.log(products);
+   console.log(products);
 
-  res.end();
-});
-router.get("/", (req, res) => {
-  res.writeHead(200, { "Content-Type": "text/html" });
-  res.write("<h1>Hello from Express.js!</h1>");
-  res.end();
+   res.end();
 });
 
 router.use("/auth", authRoutes);
 router.use("/products", productsRoutes);
 router.use("/cart", cartRoutes);
+router.use("/order", orderRoutes);
 
 module.exports = router;

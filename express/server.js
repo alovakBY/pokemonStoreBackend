@@ -5,13 +5,12 @@ const serverless = require("serverless-http");
 const app = express();
 const routes = require("./routes");
 const cors = require("cors");
-console.log(12345);
+
 app.use(
-  cors({
-    origin: "*",
-  })
+   cors({
+      origin: "*",
+   })
 );
-console.log(12345);
 
 // const router = express.Router();
 // router.get("/", (req, res) => {

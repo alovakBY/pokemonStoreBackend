@@ -52,10 +52,18 @@ class UsersService {
             const user = await usersCollection.findOne(insertedId);
 
             const cartsCollection = await dbo.collection("carts");
+            const ordersCollection = await dbo.collection("orders");
 
             await cartsCollection.insertOne({
                _id: insertedId,
+               customerId: insertedId.toString(),
                itemsList: [],
+            });
+
+            await ordersCollection.insertOne({
+               _id: insertedId,
+               customerId: insertedId.toString(),
+               orders: [],
             });
 
             return user;
