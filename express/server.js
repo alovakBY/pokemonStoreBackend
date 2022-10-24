@@ -8,9 +8,10 @@ const cors = require("cors");
 
 app.use(
   cors({
-    origin: "http://localhost:3002/*",
+    origin: "*",
   })
 );
+console.log(12345);
 
 // const router = express.Router();
 // router.get("/", (req, res) => {
