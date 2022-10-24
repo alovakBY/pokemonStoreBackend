@@ -4,6 +4,7 @@ const serverless = require("serverless-http");
 const dotenv = require("dotenv");
 const routes = require("./routes");
 const router = express.Router();
+const path = require("path");
 
 const app = express();
 dotenv.config();
