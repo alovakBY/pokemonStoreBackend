@@ -9,7 +9,6 @@ const cors = require("cors");
 app.use(
   cors({
     origin: "http://localhost:3002",
-    optionsSuccessStatus: 200,
   })
 );
 
