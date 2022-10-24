@@ -15,7 +15,7 @@ app.use(express.urlencoded({ limit: "10mb", extended: true }));
 
 // app.use("/", routes);
 app.use("/.netlify/functions/server", routes); // path must route to lambda
-// app.use("/", (req, res) => res.sendFile(path.join(__dirname, "../index.html")));
+app.use("/", (req, res) => res.sendFile(path.join(__dirname, "../index.html")));
 
 // app.listen(port, () => {
 //   console.log(`server listening on port ${port}`);
