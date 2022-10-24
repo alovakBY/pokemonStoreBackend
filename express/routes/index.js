@@ -6,48 +6,50 @@ const authRoutes = require("./auth.routes");
 const productsRoutes = require("./products.routes");
 const cartRoutes = require("./cart.routes");
 
-router.use((req, res, next) => {
-  try {
-    if (
-      req.url.startsWith("/auth") /* || req.url.startsWith("/set_pokemons") */
-    ) {
-      next();
-    } else {
-      const token = req.headers?.authorization?.split(" ")[1];
+router.get("/another", (req, res) => res.json({ route: req.originalUrl }));
 
-      if (!token) {
-        res.status(401).send({
-          code: 401,
-          message: "Not authorized",
-        });
+// router.use((req, res, next) => {
+//   try {
+//     if (
+//       req.url.startsWith("/auth") /* || req.url.startsWith("/set_pokemons") */
+//     ) {
+//       next();
+//     } else {
+//       const token = req.headers?.authorization?.split(" ")[1];
 
-        res.end();
+//       if (!token) {
+//         res.status(401).send({
+//           code: 401,
+//           message: "Not authorized",
+//         });
 
-        return;
-      }
+//         res.end();
 
-      const jwtDecoded = jwt.decode(token);
+//         return;
+//       }
 
-      if (jwtDecoded.exp * 1000 < new Date().getTime()) {
-        res.status(401).send({
-          code: 401,
-          message: "Not authorized",
-        });
+//       const jwtDecoded = jwt.decode(token);
 
-        res.end();
+//       if (jwtDecoded.exp * 1000 < new Date().getTime()) {
+//         res.status(401).send({
+//           code: 401,
+//           message: "Not authorized",
+//         });
 
-        return;
-      }
+//         res.end();
 
-      next();
-    }
-  } catch (err) {
-    res.status(401).send({
-      code: 401,
-      message: "Not authorized",
-    });
-  }
-});
+//         return;
+//       }
+
+//       next();
+//     }
+//   } catch (err) {
+//     res.status(401).send({
+//       code: 401,
+//       message: "Not authorized",
+//     });
+//   }
+// });
 
 // router.use("/set_pokemons", async (req, res) => {
 //   await client.connect();
