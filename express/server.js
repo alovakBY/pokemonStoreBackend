@@ -27,7 +27,10 @@ app.use(function (req, res, next) {
 
 app.use(
   cors({
-    origin: ["*"],
+    origin: [
+      "https://timely-mochi-9018a9.netlify.app/.netlify/functions/server/auth/signIn",
+      "http://localhost:3002",
+    ],
     methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
     credentials: true,
     origin: true,
