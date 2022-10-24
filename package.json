@@ -2,9 +2,10 @@
   "name": "node_js",
   "version": "1.0.0",
   "description": "",
+  "main": "functions/server.js",
   "scripts": {
-    "start": "./node_modules/.bin/netlify-lambda serve src",
-    "build": "./node_modules/.bin/netlify-lambda build src"
+    "start": "nodemon express/server.js",
+    "build": "netlify-lambda build express"
   },
   "author": "",
   "license": "ISC",
