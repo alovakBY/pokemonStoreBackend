@@ -23,6 +23,9 @@ router.post("/testpost", (req, res) => {
 });
 
 app.use(`/.netlify/functions/api`, router);
+app.use("/", (req, res) =>
+  res.sendFile(path.join(__dirname, "../dist/index.html"))
+);
 
 module.exports = app;
 module.exports.handler = serverless(app);
