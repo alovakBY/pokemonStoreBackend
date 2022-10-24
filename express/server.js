@@ -3,11 +3,15 @@ const express = require("express");
 const path = require("path");
 const serverless = require("serverless-http");
 const app = express();
-const bodyParser = require("body-parser");
 const routes = require("./routes");
 const cors = require("cors");
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3002",
+    optionsSuccessStatus: 200,
+  })
+);
 
 // const router = express.Router();
 // router.get("/", (req, res) => {
@@ -18,7 +22,10 @@ app.use(cors());
 // router.get("/another", (req, res) => res.json({ route: req.originalUrl }));
 // router.post("/", (req, res) => res.json({ postBody: req.body }));
 
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
+
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ limit: "10mb", extended: true }));
 
 app.use("/.netlify/functions/server", routes); // path must route to lambda
 
