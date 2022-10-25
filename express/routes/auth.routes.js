@@ -6,7 +6,6 @@ const AuthService = require("../services/users.service");
 
 router.post("/signIn", async (req, res) => {
   const user = await AuthService.getUser(req.body);
-  console.log(11111111111111);
   if (!user) {
     res.status(403).send({
       code: 403,

@@ -7,23 +7,33 @@ const routes = require("./routes");
 const cors = require("cors");
 
 const corsOptions = {
-  origin: "https://singular-ganache-ea177f.netlify.app",
+  origin: [
+    "https://singular-ganache-ea177f.netlify.app",
+    "http://localhost:3002",
+  ], // the link of my front-end app on Netlify
+  methods: ["GET", "POST", "PATCH", "DELETE", "PUT"],
   credentials: true,
 };
 
-// app.use((req, res, next) => {
-//   req.setHeader(
-//     "Access-Control-Allow-Origin",
-//     "https://singular-ganache-ea177f.netlify.app"
-//   );
-//   req.setHeader(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Origin"
-//   );
-//   next();
-// });
-
 app.use(cors(corsOptions));
+
+app.use((req, res, next) => {
+  console.log(req.headers);
+  //   res.setHeader(
+  //     "Access-Control-Allow-Origin",
+  //     "https://singular-ganache-ea177f.netlify.app"
+  //   ); // the link of my front-end app on Netlify
+  //   res.setHeader(
+  //     "Access-Control-Allow-Headers",
+  //     "Origin, X-Requested-With, Content-Type, Accept"
+  //   );
+  //   res.setHeader(
+  //     "Access-Control-Allow-Methods",
+  //     "GET, POST, PATCH, DELETE, OPTIONS"
+  //   );
+  //   res.setHeader("content-type", "application/json");
+  next();
+});
 
 // const router = express.Router();
 // router.get("/", (req, res) => {
