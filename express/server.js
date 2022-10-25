@@ -13,13 +13,17 @@ const corsOptions = {
   optionSuccessStatus: 200,
 };
 
-// app.use((req, res, next) => {
-//   res.setHeader(
-//     "Access-Control-Allow-Origin",
-//     "https://singular-ganache-ea177f.netlify.app"
-//   );
-//   next();
-// });
+app.use((req, res, next) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://singular-ganache-ea177f.netlify.app"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Origin"
+  );
+  next();
+});
 
 app.use(cors(corsOptions));
 
