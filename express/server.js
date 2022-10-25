@@ -7,7 +7,7 @@ const routes = require("./routes");
 const cors = require("cors");
 
 const corsOptions = {
-  origin: ["https://singular-ganache-ea177f.netlify.app"],
+  origin: ["https://singular-ganache-ea177f.netlify.app/*"],
   credentials: true, //access-control-allow-credentials:true
   preflightContinue: true,
   optionSuccessStatus: 200,
@@ -16,7 +16,7 @@ const corsOptions = {
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://singular-ganache-ea177f.netlify.app"
+    "https://singular-ganache-ea177f.netlify.app/*"
   );
   res.setHeader(
     "Access-Control-Allow-Headers",
