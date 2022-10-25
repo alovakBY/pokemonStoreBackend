@@ -7,23 +7,21 @@ const routes = require("./routes");
 const cors = require("cors");
 
 const corsOptions = {
-  origin: ["https://singular-ganache-ea177f.netlify.app/"],
-  "access-control-allow-credentials": true,
-  preflightContinue: true,
-  optionSuccessStatus: 200,
+  origin: "https://singular-ganache-ea177f.netlify.app",
+  credentials: true,
 };
 
-app.use((req, res, next) => {
-  req.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://singular-ganache-ea177f.netlify.app/"
-  );
-  req.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Origin"
-  );
-  next();
-});
+// app.use((req, res, next) => {
+//   req.setHeader(
+//     "Access-Control-Allow-Origin",
+//     "https://singular-ganache-ea177f.netlify.app"
+//   );
+//   req.setHeader(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Origin"
+//   );
+//   next();
+// });
 
 app.use(cors(corsOptions));
 
