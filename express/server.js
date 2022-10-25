@@ -19,10 +19,10 @@ app.use(cors(corsOptions));
 
 app.use((req, res, next) => {
   console.log(req.headers);
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://timely-mochi-9018a9.netlify.app/"
-  ); // the link of my front-end app on Netlify
+  res.setHeader("Access-Control-Allow-Origin", [
+    "https://singular-ganache-ea177f.netlify.app",
+    "http://localhost:3002",
+  ]); // the link of my front-end app on Netlify
   res.setHeader(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
