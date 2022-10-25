@@ -11,7 +11,7 @@ const corsOptions = {
     "https://singular-ganache-ea177f.netlify.app",
     "http://localhost:3002",
   ], // the link of my front-end app on Netlify
-  methods: ["GET", "POST", "PATCH", "DELETE", "PUT"],
+  methods: ["GET", "POST", "PATCH", "DELETE", "PUT", "OPTIONS"],
   credentials: true,
 };
 
