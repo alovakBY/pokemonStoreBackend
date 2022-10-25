@@ -70,6 +70,14 @@ app.use("/.netlify/functions/server", routes); // path must route to lambda
 module.exports = app;
 module.exports.handler = serverless(app);
 
+// const handler = serverless(app);
+// module.exports.handler = async (event, context, callback) => {
+//   // you can do other things here
+//   const result = await handler(event, context);
+//   // and here
+//   return result;
+// };
+
 // const express = require("express");
 // const cors = require("cors");
 // const serverless = require("serverless-http");

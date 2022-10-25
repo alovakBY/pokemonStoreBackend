@@ -1,0 +1,8 @@
+functions:
+   handler:
+      handler: handler.handler
+      events:
+         - https:
+              path: /*
+              method: post
+              cors: true # <-- CORS!
