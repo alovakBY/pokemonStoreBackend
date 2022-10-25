@@ -6,10 +6,17 @@ const app = express();
 const routes = require("./routes");
 const cors = require("cors");
 
+app.use((req, res) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://singular-ganache-ea177f.netlify.app/*"
+  );
+});
+
 app.use(
-   cors({
-      origin: "*",
-   })
+  cors({
+    origin: "*",
+  })
 );
 
 // const router = express.Router();
