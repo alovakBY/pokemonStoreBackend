@@ -6,19 +6,22 @@ const app = express();
 const routes = require("./routes");
 const cors = require("cors");
 
-app.use((req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://singular-ganache-ea177f.netlify.app/*"
-  );
-  next();
-});
+const corsOptions = {
+  origin: ["https://singular-ganache-ea177f.netlify.app"],
+  credentials: true, //access-control-allow-credentials:true
+  preflightContinue: true,
+  optionSuccessStatus: 200,
+};
 
-app.use(
-  cors({
-    origin: "*",
-  })
-);
+// app.use((req, res, next) => {
+//   res.setHeader(
+//     "Access-Control-Allow-Origin",
+//     "https://singular-ganache-ea177f.netlify.app"
+//   );
+//   next();
+// });
+
+app.use(cors(corsOptions));
 
 // const router = express.Router();
 // router.get("/", (req, res) => {
