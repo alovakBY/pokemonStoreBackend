@@ -14,11 +14,11 @@ const corsOptions = {
 };
 
 app.use((req, res, next) => {
-  res.setHeader(
+  req.setHeader(
     "Access-Control-Allow-Origin",
-    "https://singular-ganache-ea177f.netlify.app/*"
+    "https://singular-ganache-ea177f.netlify.app/"
   );
-  res.setHeader(
+  req.setHeader(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Origin"
   );
