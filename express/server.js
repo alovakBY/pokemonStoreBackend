@@ -7,8 +7,8 @@ const routes = require("./routes");
 const cors = require("cors");
 
 const corsOptions = {
-  origin: ["https://singular-ganache-ea177f.netlify.app/*"],
-  credentials: true, //access-control-allow-credentials:true
+  origin: ["https://singular-ganache-ea177f.netlify.app/"],
+  "access-control-allow-credentials": true,
   preflightContinue: true,
   optionSuccessStatus: 200,
 };
