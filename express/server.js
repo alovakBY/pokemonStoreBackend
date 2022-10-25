@@ -19,19 +19,19 @@ app.use(cors(corsOptions));
 
 app.use((req, res, next) => {
   console.log(req.headers);
-  //   res.setHeader(
-  //     "Access-Control-Allow-Origin",
-  //     "https://singular-ganache-ea177f.netlify.app"
-  //   ); // the link of my front-end app on Netlify
-  //   res.setHeader(
-  //     "Access-Control-Allow-Headers",
-  //     "Origin, X-Requested-With, Content-Type, Accept"
-  //   );
-  //   res.setHeader(
-  //     "Access-Control-Allow-Methods",
-  //     "GET, POST, PATCH, DELETE, OPTIONS"
-  //   );
-  //   res.setHeader("content-type", "application/json");
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "timely-mochi-9018a9.netlify.app"
+  ); // the link of my front-end app on Netlify
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PATCH, DELETE, OPTIONS"
+  );
+  res.setHeader("content-type", "application/json");
   next();
 });
 
