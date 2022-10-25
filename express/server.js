@@ -21,7 +21,7 @@ app.use((req, res, next) => {
   console.log(req.headers);
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "timely-mochi-9018a9.netlify.app"
+    "https://timely-mochi-9018a9.netlify.app/"
   ); // the link of my front-end app on Netlify
   res.setHeader(
     "Access-Control-Allow-Headers",
