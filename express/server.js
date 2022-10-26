@@ -71,27 +71,26 @@ app.use("/.netlify/functions/server", routes); // path must route to lambda
 
 // app.use("/", (req, res, next) => res.sendFile(path.join(__dirname, "../index.html")));
 
-const handler = serverless(app);
+module.exports.handler = serverless(app);
 module.exports = app;
-module.exports.handler = async (event, context) => {
-  // you can do other things here
-  const result = await handler(event, context);
+// module.exports.handler = async (event, context) => {
+//   const result = await handler(event, context);
 
-  const headers = {
-    "Access-Control-Allow-Origin":
-      "https://singular-ganache-ea177f.netlify.app",
-  };
+//   const headers = {
+//     "Access-Control-Allow-Origin":
+//       "https://singular-ganache-ea177f.netlify.app",
+//   };
 
-  if (event.httpMethod === "OPTIONS") {
-    return {
-      statusCode: 200, // <-- Must be 200 otherwise pre-flight call fails
-      headers,
-      body: "This was a preflight call!",
-    };
-  }
-  // and here
-  return result;
-};
+//   if (event.httpMethod === "OPTIONS") {
+//     return {
+//       statusCode: 200, // <-- Must be 200 otherwise pre-flight call fails
+//       headers,
+//       body: "This was a preflight call!",
+//     };
+//   }
+// and here
+//   return result;
+// };
 
 // const handler = serverless(app);
 // module.exports.handler = async (event, context, callback) => {
