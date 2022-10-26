@@ -11,4 +11,5 @@
 [[redirects]]
   from = '/*'
   to = '/.netlify/functions/server/:splat'
-  force = false
+  force = true
+  status = 200
