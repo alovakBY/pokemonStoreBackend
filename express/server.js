@@ -77,7 +77,18 @@ module.exports.handler = async (event, context) => {
   // you can do other things here
   const result = await handler(event, context);
 
-  result.headers["Access-Control-Allow-Origin"] = "*";
+  const headers = {
+    "Access-Control-Allow-Origin":
+      "https://singular-ganache-ea177f.netlify.app",
+  };
+
+  if (event.httpMethod === "OPTIONS") {
+    return {
+      statusCode: 200, // <-- Must be 200 otherwise pre-flight call fails
+      headers,
+      body: "This was a preflight call!",
+    };
+  }
   // and here
   return result;
 };
