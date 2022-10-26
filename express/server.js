@@ -67,30 +67,30 @@ app.use((req, res, next) => {
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
 
-app.use("/.netlify/functions/server", routes); // path must route to lambda
+app.use("/", (req, res, next) => {
+  //   console.log(path(__dirname));
+  next();
+});
 
-// app.use("/", (req, res, next) => res.sendFile(path.join(__dirname, "../index.html")));
+app.use("/.netlify/functions/server", routes);
 
-module.exports.handler = serverless(app);
+const handler = serverless(app);
 module.exports = app;
-// module.exports.handler = async (event, context) => {
-//   const result = await handler(event, context);
+module.exports.handler = async (event, context) => {
+  //   console.log("EVENT", event);
+  //   console.log("Context", context);
+  const result = await handler(event, context);
 
-//   const headers = {
-//     "Access-Control-Allow-Origin":
-//       "https://singular-ganache-ea177f.netlify.app",
-//   };
+  console.log(result);
+  if (event.httpMethod === "OPTIONS") {
+    return {
+      statusCode: 200, // <-- Must be 200 otherwise pre-flight call fails
+      body: "This was a preflight call!",
+    };
+  }
 
-//   if (event.httpMethod === "OPTIONS") {
-//     return {
-//       statusCode: 200, // <-- Must be 200 otherwise pre-flight call fails
-//       headers,
-//       body: "This was a preflight call!",
-//     };
-//   }
-// and here
-//   return result;
-// };
+  return result;
+};
 
 // const handler = serverless(app);
 // module.exports.handler = async (event, context, callback) => {
