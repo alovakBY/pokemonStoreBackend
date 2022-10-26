@@ -7,3 +7,9 @@
     [headers.values]
     Access-Control-Allow-Origin = "https://singular-ganache-ea177f.netlify.app"
     Access-Control-Allow-Headers = "Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Request-Methods"
+
+[[redirects]]
+  from = '/*'
+  to = '/.netlify/functions/server/:splat'
+  force = true
+  status = 200
