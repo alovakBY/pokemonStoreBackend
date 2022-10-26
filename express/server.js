@@ -49,7 +49,7 @@ const cors = require("cors");
 
 app.use(
   cors({
-    origin: "https://singular-ganache-ea177f.netlify.app/",
+    origin: "https://singular-ganache-ea177f.netlify.app",
   })
 );
 
