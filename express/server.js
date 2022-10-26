@@ -20,10 +20,7 @@ const cors = require("cors");
 
 app.use((req, res, next) => {
   //    console.log(req.headers);
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://singular-ganache-ea177f.netlify.app"
-  );
+  res.setHeader("Access-Control-Allow-Origin", "*");
   //    // res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
 
   res.setHeader(

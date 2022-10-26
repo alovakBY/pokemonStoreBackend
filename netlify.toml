@@ -5,5 +5,5 @@
 [[headers]]
   for = "/*"
     [headers.values]
-    Access-Control-Allow-Origin = "https://singular-ganache-ea177f.netlify.app"
+    Access-Control-Allow-Origin = "*"
     Access-Control-Allow-Headers = "Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Request-Methods"
