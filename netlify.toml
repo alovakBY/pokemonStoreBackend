@@ -12,4 +12,3 @@
   from = '/*'
   to = '/.netlify/functions/server/:splat'
   force = false
-  status = 200
