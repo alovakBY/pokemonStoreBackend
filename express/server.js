@@ -18,36 +18,36 @@ const cors = require("cors");
 //    "http://localhost:3002",
 //  ]
 
-app.use((req, res, next) => {
-   console.log(req.headers);
-   res.setHeader(
-      "Access-Control-Allow-Origin",
-      "https://singular-ganache-ea177f.netlify.app"
-   );
-   // res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+// app.use((req, res, next) => {
+//    console.log(req.headers);
+//    res.setHeader(
+//       "Access-Control-Allow-Origin",
+//       "https://singular-ganache-ea177f.netlify.app"
+//    );
+//    // res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
 
-   res.setHeader(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Request-Methods"
-   );
-   res.setHeader(
-      "Access-Control-Allow-Methods",
-      "POST, GET, PUT, OPTIONS, DELETE, HEAD"
-   );
-   res.setHeader("Access-Control-Allow-Credentials", "true");
-   res.setHeader("content-type", "application/json");
-   res.setHeader("Access-Control-Max-Age", "86400");
+//    res.setHeader(
+//       "Access-Control-Allow-Headers",
+//       "Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Request-Methods"
+//    );
+//    res.setHeader(
+//       "Access-Control-Allow-Methods",
+//       "POST, GET, PUT, OPTIONS, DELETE, HEAD"
+//    );
+//    res.setHeader("Access-Control-Allow-Credentials", "true");
+//    res.setHeader("content-type", "application/json");
+//    res.setHeader("Access-Control-Max-Age", "86400");
 
-   if (req.method === "OPTIONS") {
-      res.sendStatus(200);
-   }
+//    if (req.method === "OPTIONS") {
+//       res.sendStatus(200);
+//    }
 
-   next();
-});
+//    next();
+// });
 
 // app.options("*", cors());
 
-// app.use(cors({   }));
+app.use(cors());
 
 // const router = express.Router();
 // router.get("/", (req, res) => {
