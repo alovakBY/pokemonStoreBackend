@@ -47,7 +47,11 @@ const cors = require("cors");
 
 // app.options("*", cors());
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://singular-ganache-ea177f.netlify.app/",
+  })
+);
 
 // const router = express.Router();
 // router.get("/", (req, res) => {
