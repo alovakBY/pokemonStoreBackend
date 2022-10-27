@@ -12,7 +12,7 @@ const orderRoutes = require("./order.routes");
 router.use((req, res, next) => {
   try {
     if (
-      req.url.startsWith("/auth") /* || req.url.startsWith("/set_pokemons") */
+      req?.url?.startsWith("/auth") /* || req.url.startsWith("/set_pokemons") */
     ) {
       next();
     } else {
