@@ -6,51 +6,51 @@ const CartService = require("../services/cart.service");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-   try {
-      const token = req.headers?.authorization?.split(" ")[1];
+  try {
+    const token = req.headers?.authorization?.split(" ")[1];
 
-      const { id } = await jwt.decode(token);
+    const { id } = jwt.decode(token);
 
-      const { orders } = await OrderService.getOrders(id);
+    const { orders } = await OrderService.getOrders(id);
 
-      if (!orders) {
-         throw new Error("Orders not found");
-      }
+    if (!orders) {
+      throw new Error("Orders not found");
+    }
 
-      res.send(orders);
-   } catch (err) {
-      console.log(err);
-      res.status(403).send({
-         code: 403,
-         message: err.message,
-      });
-   } finally {
-      res.end();
-   }
+    res.send(orders);
+  } catch (err) {
+    console.log(err);
+    res.status(403).send({
+      code: 403,
+      message: err.message,
+    });
+  } finally {
+    res.end();
+  }
 });
 
 router.post("/", async (req, res) => {
-   try {
-      console.log(req.body);
+  try {
+    console.log(req.body);
 
-      const order = await OrderService.setOrder(req.body);
+    const order = await OrderService.setOrder(req.body);
 
-      if (!order) {
-         throw new Error("Error place order");
-      }
+    if (!order) {
+      throw new Error("Error place order");
+    }
 
-      await CartService.clearCart(req.body.customerId);
+    await CartService.clearCart(req.body.customerId);
 
-      res.send(order);
-   } catch (err) {
-      console.log(err);
-      res.status(403).send({
-         code: 403,
-         message: err.message,
-      });
-   } finally {
-      res.end();
-   }
+    res.send(order);
+  } catch (err) {
+    console.log(err);
+    res.status(403).send({
+      code: 403,
+      message: err.message,
+    });
+  } finally {
+    res.end();
+  }
 });
 
 module.exports = router;

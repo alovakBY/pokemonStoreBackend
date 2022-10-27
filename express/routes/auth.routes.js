@@ -12,8 +12,7 @@ router.post("/signIn", async (req, res) => {
       message: "User couldn't be found",
     });
   } else {
-    // console.log(user);
-    const token = await jwt.sign(
+    const token = jwt.sign(
       { email: user.email, password: user.password, id: user._id },
       process.env.TOKEN_SECRET,
       {
