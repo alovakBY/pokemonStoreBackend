@@ -30,7 +30,7 @@
   from = "/*"
   to = "/.netlify/functions/server/:splat"
   status = 200
-  force = true 
+  force = false 
   headers = {Access-Control-Allow-Origin = "*",Access-Control-Allow-Headers = "Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Request-Methods",Access-Control-Allow-Methods = "POST, GET, PUT, OPTIONS, DELETE, HEAD",Access-Control-Allow-Credentials = "true",content-type = "application/json",Access-Control-Max-Age = "86400"}
 
 
