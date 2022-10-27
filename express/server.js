@@ -71,6 +71,6 @@ app.use("/", (req, res, next) => {
 app.use("/.netlify/functions/server", routes);
 
 const handler = serverless(app);
-module.exports.handler = handler;
+module.exports = handler;
 
 // module.exports = app;
