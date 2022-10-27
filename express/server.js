@@ -76,24 +76,22 @@ module.exports = app;
 module.exports.handler = async (event, context) => {
   //   console.log("EVENT", event);
   //   console.log("Context", context);
-
+  const headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers":
+      "Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Request-Methods",
+  };
   // [[headers]]
   // for = "/*"
   //   [headers.values]
   //   Access-Control-Allow-Origin = "*"
   //   Access-Control-Allow-Headers = "Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Request-Methods"
 
-  if (event.httpMethod === "OPTIONS") {
-    return {
-      statusCode: 200, // <-- Must be 200 otherwise pre-flight call fails
-      body: "This was a preflight call!",
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers":
-          "Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Request-Methods",
-      },
-    };
-  }
+  return {
+    statusCode: 200, // <-- Must be 200 otherwise pre-flight call fails
+    body: "This was a preflight call!",
+    headers,
+  };
   const result = await handler(event, context);
   result.headers["Access-Control-Allow-Origin"] = "*";
   result.headers["Access-Control-Allow-Headers"] =
