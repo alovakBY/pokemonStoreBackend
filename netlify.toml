@@ -23,7 +23,6 @@
     HEAD
     '''
     Access-Control-Allow-Credentials = "true"
-    content-type = "application/json"
     Access-Control-Max-Age = "86400"
     Content-Type = "application/json"
 
