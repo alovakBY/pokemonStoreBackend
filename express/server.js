@@ -78,8 +78,9 @@ module.exports.handler = async (event, context) => {
   //   console.log("Context", context);
   const headers = {
     "Access-Control-Allow-Origin": "*",
+    "Access-Control-Expose-Headers": "Content-Security-Policy, Location",
     "Access-Control-Allow-Headers":
-      "Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Request-Methods",
+      "Content-Type, Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Request-Methods, client-sent-security-token",
   };
   // [[headers]]
   // for = "/*"
