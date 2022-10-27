@@ -63,14 +63,10 @@ app.use(cors());
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
 
-app.use("/", (req, res, next) => {
-  //   console.log(path(__dirname));
-  next();
-});
-
 app.use("/.netlify/functions/server", routes);
+app.use("/", (req, res) => res.sendFile(path.join(__dirname, "../index.html")));
 
 const handler = serverless(app);
-module.exports = handler;
+module.exports.handler = handler;
 
 // module.exports = app;
