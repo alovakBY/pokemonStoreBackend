@@ -7,6 +7,7 @@ const routes = require("./routes");
 const cors = require("cors");
 const router = express.Router();
 const AuthService = require("./services/users.service");
+const jwt = require("jsonwebtoken");
 
 app.use(cors());
 
@@ -38,15 +39,15 @@ router.post("/auth/signIn", async (req, res) => {
   res.end();
 });
 
-app.use((req) => {
-  if (req.method === "OPTIONS") {
-    return {
-      status: 200,
-    };
-  }
-});
+// app.use((req) => {
+//   if (req.method === "OPTIONS") {
+//     return {
+//       status: 200,
+//     };
+//   }
+// });
 
 app.use("/.netlify/functions/server", router);
-app.use("/", (req, res) => res.sendFile(path.join(__dirname, "../index.html")));
+// app.use("/", (req, res) => res.sendFile(path.join(__dirname, "../index.html")));
 
 module.exports.handler = serverless(app);
