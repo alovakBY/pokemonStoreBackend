@@ -26,9 +26,5 @@
     Access-Control-Max-Age = "86400"
     Content-Type = "application/json"
 
-[[redirects]]
-  from = "/*"
-  to = "/.netlify/functions/server/:splat"
-  status = 200
 
 

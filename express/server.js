@@ -5,68 +5,48 @@ const serverless = require("serverless-http");
 const app = express();
 const routes = require("./routes");
 const cors = require("cors");
-// const corsOptions = {
-//    origin: ["http://localhost:3000"],
-// 	headers: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization", "Access-Control-Request-Methods"],
-//    methods: ["POST, GET, PUT, OPTIONS, DELETE, HEAD"],
-//    credentials: true,
-// };
-
-// [
-//    "https://singular-ganache-ea177f.netlify.app",
-//    "http://localhost:3002",
-//  ]
+const router = express.Router();
+const AuthService = require("./services/users.service");
 
 app.use(cors());
-
-// app.use((req, res, next) => {
-//   res.setHeader("Access-Control-Allow-Origin", "*");
-
-//   res.setHeader(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Request-Methods"
-//   );
-//   res.setHeader(
-//     "Access-Control-Allow-Methods",
-//     "POST, GET, PUT, OPTIONS, DELETE, HEAD"
-//   );
-//   res.setHeader("Access-Control-Allow-Credentials", "true");
-//   res.setHeader("content-type", "application/json");
-//   res.setHeader("Access-Control-Max-Age", "86400");
-
-//   if (req.method === "OPTIONS") {
-//     res.sendStatus(200);
-//   }
-
-//   next();
-// });
-
-// app.options("*", cors());
-
-// app.use(
-//   cors({
-//     origin: "https://singular-ganache-ea177f.netlify.app",
-//   })
-// );
-
-// const router = express.Router();
-// router.get("/", (req, res) => {
-//   res.writeHead(200, { "Content-Type": "text/html" });
-//   res.write("<h1>Hello from Express.js!</h1>");
-//   res.end();
-// });
-// router.get("/another", (req, res) => res.json({ route: req.originalUrl }));
-// router.post("/", (req, res) => res.json({ postBody: req.body }));
-
-// app.use(bodyParser.json());
 
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
 
-app.use("/.netlify/functions/server", routes);
+router.post("/auth/signIn", async (req, res) => {
+  const user = await AuthService.getUser(req.body);
+  if (!user) {
+    res.status(403).send({
+      code: 403,
+      message: "User couldn't be found",
+    });
+  } else {
+    const token = jwt.sign(
+      { email: user.email, password: user.password, id: user._id },
+      process.env.TOKEN_SECRET,
+      {
+        expiresIn: "1h",
+      }
+    );
+
+    res.send({
+      accessToken: token,
+      ...user,
+    });
+  }
+
+  res.end();
+});
+
+app.use((req) => {
+  if (req.method === "OPTIONS") {
+    return {
+      status: 200,
+    };
+  }
+});
+
+app.use("/.netlify/functions/server", router);
 app.use("/", (req, res) => res.sendFile(path.join(__dirname, "../index.html")));
 
-const handler = serverless(app);
-module.exports.handler = handler;
-
-// module.exports = app;
+module.exports.handler = serverless(app);

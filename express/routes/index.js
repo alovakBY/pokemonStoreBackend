@@ -68,9 +68,9 @@ router.use("/set_pokemons", async (req, res) => {
   res.end();
 });
 
-router.use("/auth", authRoutes);
-router.use("/products", productsRoutes);
-router.use("/cart", cartRoutes);
-router.use("/order", orderRoutes);
+router.use("/auth/*", authRoutes);
+router.use("/products/*", productsRoutes);
+router.use("/cart/*", cartRoutes);
+router.use("/order/*", orderRoutes);
 
 module.exports = router;
